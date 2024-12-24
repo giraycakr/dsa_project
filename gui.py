@@ -12,11 +12,11 @@ class CargoSystemGUI:
         self.root.title("Kargo Takip Sistemi")
         self.system = CargoSystem()
 
-        # Ana notebook oluştur
+
         self.notebook = ttk.Notebook(root)
         self.notebook.pack(fill='both', expand=True, padx=10, pady=5)
 
-        # Ana sekmeleri oluştur
+
         self.create_customer_tab()
         self.create_shipment_tab()
         self.create_route_tab()
@@ -27,7 +27,7 @@ class CargoSystemGUI:
         customer_frame = ttk.Frame(self.notebook)
         self.notebook.add(customer_frame, text='Müşteri İşlemleri')
 
-        # Müşteri ekleme formu
+
         ttk.Label(customer_frame, text="Yeni Müşteri Ekle", font=('Helvetica', 12, 'bold')).pack(pady=10)
 
         form_frame = ttk.Frame(customer_frame)
@@ -52,7 +52,6 @@ class CargoSystemGUI:
         shipment_frame = ttk.Frame(self.notebook)
         self.notebook.add(shipment_frame, text='Kargo İşlemleri')
 
-        # Kargo ekleme formu
         ttk.Label(shipment_frame, text="Yeni Kargo Ekle", font=('Helvetica', 12, 'bold')).pack(pady=10)
 
         form_frame = ttk.Frame(shipment_frame)
@@ -77,11 +76,11 @@ class CargoSystemGUI:
         query_frame = ttk.Frame(self.notebook)
         self.notebook.add(query_frame, text='Sorgulama')
 
-        # Notebook için sorgulama sekmeleri
+
         query_notebook = ttk.Notebook(query_frame)
         query_notebook.pack(fill='both', expand=True, padx=5, pady=5)
 
-        # 1. Kargo Sorgulama Sekmesi
+
         cargo_query_frame = ttk.Frame(query_notebook)
         query_notebook.add(cargo_query_frame, text='Kargo Sorgula')
 
@@ -90,11 +89,11 @@ class CargoSystemGUI:
         self.search_id_entry.pack(pady=5)
         ttk.Button(cargo_query_frame, text="Sorgula", command=self.query_shipment).pack(pady=5)
 
-        # Sonuç alanı
+
         self.result_text = tk.Text(cargo_query_frame, height=8, width=50)
         self.result_text.pack(pady=5, padx=5)
 
-        # 2. Müşteri Geçmişi Sekmesi
+
         history_frame = ttk.Frame(query_notebook)
         query_notebook.add(history_frame, text='Müşteri Geçmişi')
 
@@ -106,7 +105,7 @@ class CargoSystemGUI:
         self.history_text = tk.Text(history_frame, height=8, width=50)
         self.history_text.pack(pady=5, padx=5)
 
-        # 3. Teslimat Süresi Sekmesi
+
         delivery_frame = ttk.Frame(query_notebook)
         query_notebook.add(delivery_frame, text='Teslimat Süresi')
 
@@ -118,7 +117,7 @@ class CargoSystemGUI:
         self.delivery_text = tk.Text(delivery_frame, height=8, width=50)
         self.delivery_text.pack(pady=5, padx=5)
 
-        # 4. Kargo Listesi Sekmesi
+
         list_frame = ttk.Frame(query_notebook)
         query_notebook.add(list_frame, text='Kargo Listesi')
 
@@ -135,7 +134,7 @@ class CargoSystemGUI:
         route_frame = ttk.Frame(self.notebook)
         self.notebook.add(route_frame, text='Rota İşlemleri')
 
-        # Sol taraf - Şehir ekleme formu
+
         form_frame = ttk.LabelFrame(route_frame, text="Yeni Şehir Ekle")
         form_frame.pack(side=tk.LEFT, fill='both', expand=True, padx=5, pady=5)
 
@@ -153,11 +152,11 @@ class CargoSystemGUI:
 
         ttk.Button(form_frame, text="Şehir Ekle", command=self.add_city).pack(pady=10)
 
-        # Sağ taraf - Rota görüntüleme
+
         view_frame = ttk.LabelFrame(route_frame, text="Rota Görünümü")
         view_frame.pack(side=tk.RIGHT, fill='both', expand=True, padx=5, pady=5)
 
-        # Rota gösterimi için Text widget
+
         self.route_text = tk.Text(view_frame, height=15, width=40)
         self.route_text.pack(padx=5, pady=5)
 
@@ -235,7 +234,7 @@ class CargoSystemGUI:
 
         if self.system.add_shipment(shipment_id, customer_id, delivery_time):
             messagebox.showinfo("Başarılı", "Kargo başarıyla eklendi!")
-            # Formu temizle
+
             self.ship_customer_id_entry.delete(0, tk.END)
             self.shipment_id_entry.delete(0, tk.END)
             self.delivery_time_entry.delete(0, tk.END)
@@ -250,7 +249,7 @@ class CargoSystemGUI:
             messagebox.showerror("Hata", "Lütfen gönderi ID girin!")
             return
 
-        # Tüm kargolar içinde arama yap
+
         found = False
         for shipment in self.system.all_shipments:
             if shipment.shipment_id == shipment_id:
